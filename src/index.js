@@ -3,13 +3,15 @@
 
 
 import { cases, panBalticCases } from "./public/js/data/cases";
-
+import {fetchData} from "./public/js/data/fetchContent"
 import { createMap, addLayerToMap } from "./public/js/map";
 
 const token = localStorage.getItem("auth-token");
+const user =  localStorage.getItem("username");
 const localSelection = document.querySelector("#selectableContent");
 const panSelection = document.querySelector("#selectableContentPan");
 panSelection.style.display = "none";
+
 
 createMap();
 populateNavbar();
@@ -20,7 +22,7 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
   const colors = ["waves-light", "red", "blue"];
   const identifier = obj.name.toLowerCase().replace(/ /g, "_");
   
-  let htmlString = `<button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button>`;
+  let htmlString = `<div class = 'toggle_container'>  <p>+</p><button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button></div>`;
       htmlString += `<div class='content ${identifier} accordion-container level-${depth} '>`;
   
   if(obj.hasOwnProperty('sites')){
@@ -35,27 +37,32 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
     obj.data.map( dataPoint  => {
       const dataID = `${parent}-${identifier}-${dataPoint.name}-layer`;
       const dataURL = dataPoint.url;
+      const dataLayer = dataPoint.layer;
       htmlString += `<label class='switch'>
-      <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}'/>
+      <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}'/>
       <span class='slider'> ${identifier} </span>
      </label>`;
      
     })
     }
+
   return htmlString;
 }
 
-cases.map(caseSite => {
-  localSelection.innerHTML += generateCaseContent(caseSite); 
-});
+createHTML();
+async function createHTML (){
+  const caseTest = await fetchData(token);
+    caseTest.map(caseSite => {
+    localSelection.innerHTML += generateCaseContent(caseSite); 
+  });
 
-panBalticCases.map(caseSite => {
-  panSelection.innerHTML += generateCaseContent(caseSite); 
-});
+  panBalticCases.map(caseSite => {
+    panSelection.innerHTML += generateCaseContent(caseSite); 
+  });
 
-
-accordionFunctionality(); //add toggle and hide functionality to the cases
-layerToggleFunctionality();
+  accordionFunctionality(); //add toggle and hide functionality to the cases
+  layerToggleFunctionality();
+}
 
 function accordionFunctionality() {
   const accordions = document.querySelectorAll(".accordion");
@@ -93,15 +100,16 @@ function accordionFunctionality() {
 
 function layerToggleFunctionality(){
   const toggles = document.querySelectorAll(".toggle");
-
-  for (let index = 0; index < toggles.length; index++) {
-
-    const dataID = toggles[index].id;
-    const dataURL = toggles[index].getAttribute("data-url");
-
-    if( dataURL !== "undefined")  return addLayerToMap(dataID, dataURL);
+  
+  toggles.forEach ((toggleButton)=> {
+      
+    const dataID = toggleButton.id;
+    const dataURL = toggleButton.getAttribute("data-url");
+    const dataName = toggleButton.getAttribute("data-layer");
    
-  }
+    if( dataURL !== "undefined")  return addLayerToMap(dataID, dataURL, dataName);
+   
+  })
   
 }
 
@@ -133,9 +141,16 @@ function populateNavbar() {
 
     logoutBtn.addEventListener("click", event => {
       localStorage.removeItem("auth-token");
+      localStorage.removeItem("username");
       window.open("/index.html", "_self"); //Reload the window to make the changes appear.
     });
   }
+if (user) {
+  const usergreeting = document.createElement("p");
+  usergreeting.classList = "waves-effect";
+  usergreeting.innerHTML = `Hello ${user}`
+  navbar.appendChild(usergreeting);
+}
 }
 
 

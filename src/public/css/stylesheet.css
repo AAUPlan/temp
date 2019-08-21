@@ -133,3 +133,9 @@ nav{
     display: flex;
     flex-direction: row;
 }
+
+.toggle_container{
+    color:red;
+    display:flex;
+    flex-direction: row;
+}

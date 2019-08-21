@@ -19,11 +19,12 @@ async function loginUser(options) {
 
   const status = document.querySelector("#login-status");
   status.innerHTML = data.msg;
-
+  
   //Return to frontpage if log in is successful
   if (data.code === 200) {
     status.classList = "teal lighten-2 text-box card-panel text-white";
-    localStorage.setItem("auth-token", data.token);
+    localStorage.setItem("auth-token", data["auth-token"]);
+    localStorage.setItem("username", data.username);
     window.open("/index.html", "_self");
   } else {
     status.classList = "red lighten-2 text-box card-panel";

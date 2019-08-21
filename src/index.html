@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="./public/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/modal.css">
     <link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
 
     <title>Baltic Front</title>
@@ -18,6 +19,7 @@
                 <div class="flex-row">
                     <img src="./public/assets/BalticRIM-90x180px.png" alt="BalticRIM Logo" width="180" height="90">
                     <div id="nav-btns">
+                        <a class="waves-effect waves-light btn" name ="modal-trigger">About</a>
                     </div>
                 </div>
             </nav>
@@ -44,9 +46,24 @@
         </div>
     </div>
 
+    <div class="flex align-center align-vert modal modal--align">
+            <div class="modal__container">
+                    <p style="font-weight: bold;"> Baltic Sea Region Integrated Maritime Cultural Heritage Management</p>
+                <a class="modal__close modal__close--x" aria-hidden="true">&#x2715;</a>
+                <p>Baltic Sea Region Integrated Maritime Cultural Heritage Management <br> 
+                    The cultural heritage (CH) of the Baltic Sea is exceptionally versatile and well preserved even in a global comparison. To date, these cultural assets are barely included in Maritime Spatial Planning (MSP) in the Baltic Sea. 
+                    The BalticRIM project aims to integrate cultural heritage resource management into MSP in the Baltic Sea, using the opportunity of the ongoing processes driven by the MSP Directive across all Baltic Sea Region (BSR) countries. 
+                    It will contribute to some lacking dimension of sustainability in the MSP processes in the BSR, thereby closing gaps to support regional efforts and to become an international model of MSP implementation. 
+                    BalticRIM aims to improve the capacity of regional and maritime cultural heritage (MCH) planning agencies by developing, testing and implementing new planning solutions, innovative ways of public participation as well as sectoral MCH concepts throughout the BSR. 
+                    <br> + Instructions  </p>
+                
+            </div>
+    </div>
+    <script type="text/javascript" src="./public/js/modal.js"></script>   
 
 
 
 </body>
+
 <script type="text/javascript" src="./index.js"></script>
 </html>
