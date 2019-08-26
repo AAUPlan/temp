@@ -124,8 +124,6 @@ function modal() {
       trigger = document.getElementsByName('modal-trigger')[0],
       close = document.getElementsByClassName('modal__close'); // we loops this to catch the different closers
 
-  console.log(trigger);
-
   closeModal = function () {
     modal.classList.remove('modal--show');
     modal.classList.add('modal--hide'); // Remove hide class after animation is done
@@ -201,7 +199,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57755" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52449" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

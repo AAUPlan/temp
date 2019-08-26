@@ -1,7 +1,6 @@
 "use strict";
 
 
-
 import { cases, panBalticCases } from "./public/js/data/cases";
 import {fetchData} from "./public/js/data/fetchContent"
 import { createMap, addLayerToMap } from "./public/js/map";
@@ -22,7 +21,7 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
   const colors = ["waves-light", "red", "blue"];
   const identifier = obj.name.toLowerCase().replace(/ /g, "_");
   
-  let htmlString = `<div class = 'toggle_container'>  <p>+</p><button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button></div>`;
+  let htmlString = `<button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button>`;
       htmlString += `<div class='content ${identifier} accordion-container level-${depth} '>`;
   
   if(obj.hasOwnProperty('sites')){
@@ -34,16 +33,22 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
   }
   
   if(obj.hasOwnProperty('data')){
+    htmlString += '<ul class="layerlist">' 
     obj.data.map( dataPoint  => {
-      const dataID = `${parent}-${identifier}-${dataPoint.name}-layer`;
+      const dataID = `${parent}-${identifier}-${dataPoint.name.toLowerCase().replace(/ /g, "_")}-layer`;
       const dataURL = dataPoint.url;
+      const downloadURL = dataPoint.durl;
+      const downloadName = dataPoint.dname;
       const dataLayer = dataPoint.layer;
-      htmlString += `<label class='switch'>
+      htmlString += `<li class= 'layer'><label class='switch'>
       <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}'/>
-      <span class='slider'> ${identifier} </span>
-     </label>`;
+      <span class='slider'> ${dataPoint.name} </span>
+      <a class="waves-effect waves-light btn" name ="download-button" href='${downloadURL}' download='${downloadName}'>Download</a>
+
+     </label></li>`;
      
     })
+    htmlString += '</ul>'
     }
 
   return htmlString;
@@ -51,8 +56,8 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
 
 createHTML();
 async function createHTML (){
-  const caseTest = await fetchData(token);
-    caseTest.map(caseSite => {
+  const casesServer = await fetchData(token);
+    casesServer.map(caseSite => {
     localSelection.innerHTML += generateCaseContent(caseSite); 
   });
 
@@ -106,8 +111,7 @@ function layerToggleFunctionality(){
     const dataID = toggleButton.id;
     const dataURL = toggleButton.getAttribute("data-url");
     const dataName = toggleButton.getAttribute("data-layer");
-   
-    if( dataURL !== "undefined")  return addLayerToMap(dataID, dataURL, dataName);
+    if( dataURL !== "undefined" && dataID !== "undefined" && dataName !== "undefined")  return addLayerToMap(dataID, dataURL, dataName);
    
   })
   
@@ -117,6 +121,8 @@ function layerToggleFunctionality(){
 
 function populateNavbar() {
   const navbar = document.querySelector("#nav-btns");
+  const greetingBox = document.querySelector (".greeting");
+  const addDataBox = document.querySelector (".addDataBox");
 
   // If the user has an authorized token in local storage, the UI will change
   if (!token) {
@@ -146,10 +152,23 @@ function populateNavbar() {
     });
   }
 if (user) {
-  const usergreeting = document.createElement("p");
-  usergreeting.classList = "waves-effect";
-  usergreeting.innerHTML = `Hello ${user}`
-  navbar.appendChild(usergreeting);
+  const usergreeting = document.createElement("p"); //Create greeting box for logged in users
+  usergreeting.classList = "gray-text";
+  usergreeting.innerHTML = `Hello ${user}`;
+  greetingBox.appendChild(usergreeting);
+  
+  const addDataBtn = document.createElement("BUTTON"); //Create greeting box for logged in users
+  addDataBtn.classList = "btn-floating waves-effect waves-light red";
+  addDataBtn.innerHTML = `+`;
+  addDataBox.appendChild(addDataBtn);
+
+  addDataBtn.addEventListener("click", event => {
+    window.open("http://94.231.110.64:8080/geoserver/web"); //Get the user to the
+  });
+}
+else{
+  greetingBox.classList = "invisible";
+  addDataBox.classList = "invisible";
 }
 }
 

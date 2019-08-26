@@ -5,7 +5,7 @@ function modal() {
   var modal = document.getElementsByClassName('modal')[0],
       trigger = document.getElementsByName('modal-trigger')[0],
       close = document.getElementsByClassName('modal__close'); // we loops this to catch the different closers
-console.log(trigger);
+
   closeModal = function() {
     modal.classList.remove('modal--show');
     modal.classList.add('modal--hide');
@@ -50,3 +50,4 @@ console.log(trigger);
   }
 
 }modal();
+
