@@ -18,11 +18,14 @@ populateNavbar();
 let generateCaseContent = function(obj, depth = 0, parent = "top"){
   // This rather convoluted recursive function iterates through the input data and populates the UI with accordions accordingly. With this approach, the input data can be of any depth. Consider the naming of the objects in the input, they should be  unique.
 
-  const colors = ["waves-light", "red", "blue"];
+  const colors = ["wave-effect waves-light", "red", "blue"]; //wave-effect
   const identifier = obj.name.toLowerCase().replace(/ /g, "_");
   
-  let htmlString = `<button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button>`;
+  let htmlString = `<li id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</li>`;
       htmlString += `<div class='content ${identifier} accordion-container level-${depth} '>`;
+
+ /* let htmlString = `<button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button>`;
+      htmlString += `<div class='content ${identifier} accordion-container level-${depth} '>`;*/
   
   if(obj.hasOwnProperty('sites')){
     depth += 1;
@@ -33,22 +36,24 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
   }
   
   if(obj.hasOwnProperty('data')){
-    htmlString += '<ul class="layerlist">' 
+    htmlString += '<ul class="layerlist">' //layerlist
     obj.data.map( dataPoint  => {
       const dataID = `${parent}-${identifier}-${dataPoint.name.toLowerCase().replace(/ /g, "_")}-layer`;
       const dataURL = dataPoint.url;
       const downloadURL = dataPoint.durl;
       const downloadName = dataPoint.dname;
       const dataLayer = dataPoint.layer;
-      htmlString += `<li class= 'layer'><label class='switch'>
-      <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}'/>
-      <span class='slider'> ${dataPoint.name} </span>
-      <a class="waves-effect waves-light btn" name ="download-button" href='${downloadURL}' download='${downloadName}'>Download</a>
-
-     </label></li>`;
+      htmlString += `<li class= 'layer'>
+        <label class='checkLayer'>
+          <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}'/>
+          <span> ${dataPoint.name} </span>
+        </label>
+        <a class='waves-effect download-button' role="button" name ='download-button' href='${downloadURL}' download='${downloadName}'>Download</a>
+        </li>`;
      
     })
     htmlString += '</ul>'
+    console.log (htmlString);
     }
 
   return htmlString;
@@ -95,7 +100,7 @@ function accordionFunctionality() {
           let parentContainerHeight = parseInt(content.parentElement.style.maxHeight.split("p")[0]); //The height of the element is returned as a string e.g. 100px. For this reason, the string is split at p, the first element, the number, is then parced as an integer.
           let childContainerHeight = parseInt(content.style.maxHeight.split("p")[0]);
     
-          content.parentElement.style.maxHeight = parentContainerHeight + childContainerHeight + 20 + "px";
+          content.parentElement.style.maxHeight = parentContainerHeight + childContainerHeight + 10 + "px";
         }
       }
     });
@@ -117,8 +122,6 @@ function layerToggleFunctionality(){
   
 }
 
-
-
 function populateNavbar() {
   const navbar = document.querySelector("#nav-btns");
   const greetingBox = document.querySelector (".greeting");
@@ -129,20 +132,20 @@ function populateNavbar() {
     const linkToLogin = document.createElement("a"); //TODO consider making these buttons for accesibility consistency½
     linkToLogin.href = "/login.html";
     linkToLogin.innerHTML = "Log in";
-    linkToLogin.classList = "waves-effect waves-light btn";
+    linkToLogin.classList = "waves-effect waves-light btn-small";
 
-    const linkToRegister = document.createElement("a"); //TODO consider making these buttons for accesibility consistency
+   /* const linkToRegister = document.createElement("a"); //TODO consider making these buttons for accesibility consistency
     linkToRegister.href = "register.html";
     linkToRegister.innerHTML = "Register";
-    linkToRegister.classList = "waves-effect waves-light btn";
+    linkToRegister.classList = "waves-effect waves-light btn"; */
 
     navbar.appendChild(linkToLogin);
-    navbar.appendChild(linkToRegister);
+    //navbar.appendChild(linkToRegister);
 
   } else {
     const logoutBtn = document.createElement("BUTTON");
     logoutBtn.innerHTML = "Log out";
-    logoutBtn.classList = "waves-effect waves-light btn";
+    logoutBtn.classList = "waves-effect waves-light btn-small";
     navbar.appendChild(logoutBtn);
 
     logoutBtn.addEventListener("click", event => {
