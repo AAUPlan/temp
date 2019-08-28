@@ -196,7 +196,10 @@ exports.cases = [{
     name: "South-Eastern Baltic ",
     sites: [{
       name: "Pilot area 1",
-      data: []
+      data: [{
+        name: "hej",
+        url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3AArchaelogicalSitesPoland&maxFeatures=50&outputFormat=application%2Fjson&srsname=EPSG:3857"
+      }]
     }, {
       name: "Pilot area 2",
       data: []
@@ -54794,7 +54797,7 @@ populateNavbar();
 
 let generateCaseContent = function (obj, depth = 0, parent = "top") {
   // This rather convoluted recursive function iterates through the input data and populates the UI with accordions accordingly. With this approach, the input data can be of any depth. Consider the naming of the objects in the input, they should be  unique.
-  const colors = ["wave-effect waves-light", "red", "blue"]; //wave-effect
+  const colors = ["wave-effect waves-light", "red", "blue"]; //wave-effect, "red", "blue"
 
   const identifier = obj.name.toLowerCase().replace(/ /g, "_");
   let htmlString = `<li id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</li>`;
@@ -54994,7 +54997,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64480" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49370" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

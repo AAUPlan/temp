@@ -32,7 +32,7 @@ exports.cases = [
       {
         name: "South-Eastern Baltic ",
         sites: [
-          { name: "Pilot area 1", data: [] },
+          { name: "Pilot area 1", data: [{name: "hej", url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3AArchaelogicalSitesPoland&maxFeatures=50&outputFormat=application%2Fjson&srsname=EPSG:3857"}] },
           { name: "Pilot area 2", data: [] },
           { name: "Pilot area 3", data: [] }
         ]

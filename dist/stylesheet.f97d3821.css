@@ -1,6 +1,7 @@
 body{
     height: 100vh;
     width: 100vw;
+    overflow-y: hidden;
 }
 
 .form{
@@ -19,11 +20,13 @@ body{
 #selectableContent{
     display: flex;
     flex-direction: column;
+    
 }
 
 #selectableContentPan{
     display: flex;
     flex-direction: column;
+    
 }
 
 #submit-button-container{
@@ -79,7 +82,7 @@ nav{
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 12;
-    overflow: scroll;
+    overflow: scroll; 
     background-color: rgba(230,230,230,0.87);
 }
 
@@ -98,25 +101,28 @@ nav{
     overflow: hidden;
 }
 
-
 .level-1{
-    width:100%;
+    width:80%;
+    display: flex;
+    align-self: center;
+    overflow:auto !important;
 }
 
 .level-2{
-    width: 90%;
-    align-self: flex-end;
+    width:80%;
+    display: flex;
+    align-self: center;
+    overflow:hidden;
 }
 
 .level-3{
-    width: 90%;
     align-self: flex-end;
-
+    overflow:auto !important;
 }
 
 .level-4{
-    width: 90%;
     align-self: flex-end;
+    overflow:auto !important;
 }
 
 
@@ -181,12 +187,14 @@ nav{
 }
 
 .layerlist{
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;   
+    margin-left: 0.5rem;  
+    margin-right: 0.5rem;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .layer{
-    margin-left:1rem;
+    margin-left:0.5rem;
     right:0px;
     display:flex;
     flex-direction: row;
@@ -239,6 +247,8 @@ nav{
     flex-direction: row;
     justify-content: center;
 }
+
+
 
 
 
