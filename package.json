@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "ol": "^5.3.3",
     "parcel": "^1.12.3",
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "pg": "^7.12.1"
   }
 }

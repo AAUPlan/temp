@@ -62,14 +62,14 @@ nav{
     height: 100% !important;
     z-index: 2;
     grid-column-start: 1;
-    grid-column-end: 12;
+    grid-column-end: 13;
     grid-row-start: 1;
     grid-row-end: 1;
 }
 
 .map{
-    grid-column-start: 3;
-    grid-column-end: 12;
+    grid-column-start: 4;
+    grid-column-end: 13;
     grid-row-start: 2;
     grid-row-end: 12;
     z-index: 1;
@@ -79,7 +79,7 @@ nav{
     display: flex;
     flex-direction: column;
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 12;
     overflow: scroll; 
@@ -90,15 +90,17 @@ nav{
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(11, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(11, 1fr);
 }
 
 .accordion-container{
     display: flex;
     flex-direction: column;
+    align-self: center;
     max-height: 0;
     overflow: hidden;
+    width:90%;
 }
 
 .level-1{
@@ -163,7 +165,7 @@ nav{
 }
 
 .greeting{ 
-    grid-column-start: 11;
+    grid-column-start: 12;
     grid-row-start: 2;
     z-index: 2;
     opacity:0.5;
@@ -217,7 +219,7 @@ nav{
 }
 
 .addDataBox{
-    grid-column-start: 11;
+    grid-column-start: 12;
     grid-row-start: 11;
     z-index: 2;
     margin:0.5rem;
@@ -247,6 +249,5 @@ nav{
     flex-direction: row;
     justify-content: center;
 }
-
 
 

@@ -54797,7 +54797,7 @@ populateNavbar();
 
 let generateCaseContent = function (obj, depth = 0, parent = "top") {
   // This rather convoluted recursive function iterates through the input data and populates the UI with accordions accordingly. With this approach, the input data can be of any depth. Consider the naming of the objects in the input, they should be  unique.
-  const colors = ["wave-effect waves-light", "red", "blue"]; //wave-effect, "red", "blue"
+  const colors = ["wave-effect waves-light", "orange darken-5", "cyan darken-1"]; //wave-effect, "red", "blue"
 
   const identifier = obj.name.toLowerCase().replace(/ /g, "_");
   let htmlString = `<li id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</li>`;
@@ -54997,7 +54997,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49370" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53932" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
