@@ -25,7 +25,7 @@ exports.cases = [
       { name: "Gulf of Gdansk", data: [{name: "hej", url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3AGulfGdansk&maxFeatures=50&outputFormat=application%2Fjson"}] }
     ]
   },
-  { name: "Lithuanian case", sites: [{ name: "Relict forest", data: [{name: "hej", layer:"AAU_Setup:LithuanianShipWrecks", url:"http://94.231.110.64:8080/geoserver/AAU_Setup/wms/kml?layers=AAU_Setup:LithuanianShipWrecks", durl:"http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3ALithuanianShipWrecks&maxFeatures=50&outputFormat=SHAPE-ZIP", dname: "Polish_Shipwrecks"}] }] },
+  { name: "Lithuanian case", sites: [{ name: "Relict forest", data: [{name: "hej", layer:"AAU_Setup:LithuanianShipWrecks", url:"http://94.231.110.64:8080/geoserver/AAU_Setup/wms?service=WMS&version=1.1.0&request=GetMap&layers=AAU_Setup%3ALithuanianShipWrecks&bbox=20.900150277777776%2C55.5000361%2C21.00027463888889%2C55.6263889&width=608&height=768&srs=EPSG%3A4326&format=application/openlayers", durl:"http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3ALithuanianShipWrecks&maxFeatures=50&outputFormat=SHAPE-ZIP", dname: "Polish_Shipwrecks"}] }] },
   {
     name: "Russian case",
     sites: [
@@ -67,5 +67,52 @@ exports.panBalticCases = [
       { name: "Hansa Routes", data: [] },
       { name: "Underwater Landscape", data: [] }
     ]
+  },
+  {
+    name: "National Data",
+    sites: [
+      { "name": "Germany", 
+      "data": [
+        {"name": "Wrecks-dots", "public":false, "layer":"", "url": "", "durl": "", "dname": ""},
+        {"name": "Wrecks-density", "public":false, "layer":"", "url": "", "durl": "", "dname": ""}
+      ] 
+    },
+  
+    { "name": "Denmark", 
+      "data": [
+        {"name": "Wrecks-dots", "public":false, "layer":"AAU_Setup:vrag", "url": "http://94.231.110.64:8080/geoserver/AAU_Setup/wms", "durl": "", "dname": "wrecks_points_denmark"},
+        {"name": "Wrecks-density", "public":true, "layer":"AAU_Setup:hexagosns_vrag", "url": "http://94.231.110.64:8080/geoserver/AAU_Setup/wms?service=WMS&version=1.1.0&request=GetMap&layers=AAU_Setup%3Ahexagosns_vrag&bbox=1049976.2171460772%2C7204902.859798463%2C1881234.758307235%2C7951547.51484547&width=768&height=689&srs=EPSG%3A3857&format=application/openlayers", "durl": "", "dname": "wrecks_polygons_denmark"}
+      ] 
+    },
+
+    { "name": "Poland", 
+      "data": [
+        {"name": "Wrecks-dots", "public":false, "layer":"", "url": "", "durl": "", "dname": ""},
+        {"name": "Wrecks-density", "public":false, "layer":"", "url": "", "durl": "", "dname": ""}
+      ] 
+    },
+
+    { "name": "Lithuania", 
+      "data": [
+        {"name": "Wrecks-dots", "public":false, "layer":"", "url": "", "durl": "", "dname": ""},
+        {"name": "Wrecks-density", "public":false, "layer":"", "url": "", "durl": "", "dname": ""}
+      ] 
+    },
+
+    { "name": "Russia", 
+      "data": [
+        {"name": "Wrecks-dots", "public":false, "layer":"", "url": "", "durl": "", "dname": ""},
+        {"name": "Wrecks-density", "public":false, "layer":"", "url": "", "durl": "", "dname": ""}
+      ] 
+    },
+
+    { "name": "Finland", 
+      "data": [
+        {"name": "Wrecks-dots", "public":false, "layer":"", "url": "", "durl": "", "dname": ""},
+        {"name": "Wrecks-density", "public":false, "layer":"", "url": "", "durl": "", "dname": ""}
+      ] 
+    }
+    ]
   }
 ];
+

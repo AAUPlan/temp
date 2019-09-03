@@ -1,8 +1,9 @@
 "use strict";
 
 
-import { cases, panBalticCases } from "./public/js/data/cases";
-import {fetchData} from "./public/js/data/fetchContent"
+//import { cases, panBalticCases } from "./public/js/data/cases";
+import {fetchData} from "./public/js/data/fetchContent";
+import {fetchpanData} from "./public/js/data/fetchPanContent"
 import { createMap, addLayerToMap } from "./public/js/map";
 
 const token = localStorage.getItem("auth-token");
@@ -36,7 +37,7 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
   }
   
   if(obj.hasOwnProperty('data')){
-    htmlString += '<ul class="layerlist">' //layerlist
+    htmlString += '<ul class="layerlist">' 
     obj.data.map( dataPoint  => {
       const dataID = `${parent}-${identifier}-${dataPoint.name.toLowerCase().replace(/ /g, "_")}-layer`;
       const dataURL = dataPoint.url;
@@ -50,10 +51,8 @@ let generateCaseContent = function(obj, depth = 0, parent = "top"){
         </label>
         <a class='waves-effect download-button' role="button" name ='download-button' href='${downloadURL}' download='${downloadName}'>Download</a>
         </li>`;
-     
     })
     htmlString += '</ul>'
-    console.log (htmlString);
     }
 
   return htmlString;
@@ -65,8 +64,8 @@ async function createHTML (){
     casesServer.map(caseSite => {
     localSelection.innerHTML += generateCaseContent(caseSite); 
   });
-
-  panBalticCases.map(caseSite => {
+  const panBalticCasesServer = await fetchpanData(token);
+  panBalticCasesServer.map(caseSite => {
     panSelection.innerHTML += generateCaseContent(caseSite); 
   });
 

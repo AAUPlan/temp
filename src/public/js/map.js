@@ -24,7 +24,6 @@ import TileWMS from 'ol/source/TileWMS.js';
     });
       
     return tilesource;
-  
   }
 
 function createLayer(urlString){
@@ -106,8 +105,6 @@ function defineLayer (dataURL, dataID, dataName) {
 
       
     }
-
-
 
 exports.addLayerToMap = function(dataID, dataURL, dataName){
   let newLayerToggleSelector = document.querySelector(`#${dataID}`);

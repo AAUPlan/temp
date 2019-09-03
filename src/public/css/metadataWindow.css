@@ -1,0 +1,47 @@
+.mdwindow { 
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    grid-column-start: 11;
+    grid-column-end: 13;
+    grid-row-start: 3;
+    grid-row-end: 6;
+    grid-template-areas: "header header"
+                         "main_title main_info";
+
+    grid-template-columns: 5rem 2fr;
+    margin:1rem;
+    z-index: 2;
+}
+
+.header {
+    background-color: #26a69a;
+    color:#fff;
+    text-align: center;
+    }
+    
+.main_body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: blue;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+  
+.main_title {
+    background-color: blue;
+    height: 2rem;
+}
+
+.main_info {
+    height: 2rem;
+    background-color: green;
+    
+}

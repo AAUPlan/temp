@@ -117,60 +117,60 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"public/js/register.js":[function(require,module,exports) {
-const registerForm = document.getElementById("registerForm");
-registerForm.addEventListener("submit", event => {
-  event.preventDefault();
-  const name = document.querySelector("#user_name").value;
-  const username = document.querySelector("#user_username").value;
-  const email = document.querySelector("#user_mail").value;
-  const password = document.querySelector("#user_password").value;
-  const userDetails = {
-    name,
-    username,
-    email,
-    password
+})({"public/js/db.js":[function(require,module,exports) {
+// Modal - JS
+function metadataW() {
+  var metadataW = document.getElementsByClassName('mdwindow')[0],
+      metadataW_trigger = document.getElementsByName('metadata-trigger')[0],
+      metadataWclose = document.getElementsByClassName('mdwindow__close'); // we loops this to catch the different closers
+
+  closemetadataW = function () {
+    metadataW.classList.remove('mdwindow--show');
+    metadataW.classList.add('mdwindow--hide'); // Remove hide class after animation is done
+
+    afterAnimation = function () {
+      metadataW.classList.remove('mdwindow--hide');
+    }; // This listens for the CSS animations to finish and then hides the modal
+
+
+    metadataWl.addEventListener("webkitAnimationEnd", afterAnimation, false);
+    metadataW.addEventListener("oAnimationEnd", afterAnimation, false);
+    metadataW.addEventListener("msAnimationEnd", afterAnimation, false);
+    metadataW.addEventListener("animationend", afterAnimation, false);
+  }; // Open the modal 
+
+
+  metadataW_trigger.onclick = function () {
+    metadataW.classList.add('mdwindow--show');
+  }; // Close the modal with any element with class 'modal__close'
+
+
+  for (var i = 0; i < metadataWclose.length; i++) {
+    metadataWclose[i].onclick = function () {
+      closemetadataW();
+    };
+  } // Click outside of the modal and close it
+
+
+  window.onclick = function (e) {
+    if (e.target == metadataW) {
+      closemetadataW();
+    }
+  }; // Use the escape key to close modal
+
+
+  document.onkeyup = function (e) {
+    e = e || window.event;
+
+    if (metadataW.classList.contains('mdwindow--show')) {
+      if (e.keyCode == 27) {
+        closemetadataW();
+      }
+    }
   };
-  const registerOptions = createOptions(userDetails);
-  registerUser(registerOptions);
-});
-
-async function registerUser(options) {
-  const response = await fetch("http://balticrimdataportal.eu:3000/api/user/register", options);
-  const data = await response.json();
-  const status = document.querySelector("#register-status");
-  status.innerHTML = data.msg;
-  const linkDiv = document.querySelector("#link-login-page");
-  const linkToLogin = document.createElement("a");
-  linkToLogin.href = "login.html"; // Insted of calling setAttribute
-
-  linkToLogin.innerHTML = "Go to login page"; // <a>INNER_TEXT</a>
-
-  linkToLogin.classList = "font-dark";
-
-  if (data.code === 200) {
-    status.classList = "teal lighten-2 text-box card-panel text-white";
-    const submitBtn = document.querySelector("#submit-button-container");
-    submitBtn.style.display = "none";
-    linkDiv.appendChild(linkToLogin);
-    linkDiv.classList = "waves-effect waves-light btn btn-wide";
-  } else {
-    status.classList = "red lighten-2 text-box card-panel";
-  }
-} //Managing post options
-
-
-function createOptions(data) {
-  const options = {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  };
-  return options;
 }
+
+metadataW();
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -199,7 +199,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50288" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64646" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -374,5 +374,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","public/js/register.js"], null)
-//# sourceMappingURL=/register.76259f52.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","public/js/db.js"], null)
+//# sourceMappingURL=/db.d73866be.js.map

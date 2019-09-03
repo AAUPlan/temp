@@ -117,136 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"public/js/data/cases.js":[function(require,module,exports) {
-exports.cases = [{
-  name: "German case",
-  sites: [{
-    name: "Schleswig-Holstein’s maritime cultural heritage",
-    data: []
-  }]
-}, {
-  name: "Danish-German case",
-  sites: [{
-    name: "Flensburg Fjord",
-    data: [{
-      name: "hej",
-      layer: "AAU_Setup:Danish_GermanCase",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/wms",
-      durl: "http://94.231.110.64:8080/geoserver/AAU_Setup/wms?service=WMS&version=1.1.0&request=GetMap&layers=AAU_Setup%3ADanish_GermanCase&bbox=2288046.3203999996%2C-232821.69289999828%2C2329076.3203999996%2C-205101.69289999828&width=768&height=518&srs=EPSG%3A3057&format=image%2Fgeotiff",
-      dname: "Flensburg_Fjord_Case_Area"
-    }]
-  }]
-}, {
-  name: "Danish case",
-  sites: [{
-    name: "The Oeresund",
-    data: [{
-      name: "Shipwrecks",
-      layer: "AAU_Setup:culturalheritage",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3Aculturalheritage&maxFeatures=50000&outputFormat=application%2Fjson&srsname=EPSG:3857",
-      durl: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3Aculturalheritage&maxFeatures=50&outputFormat=SHAPE-ZIP",
-      dname: "Shipwrecks"
-    }, {
-      name: "Shipss",
-      layer: "AAU_Setup:culturalheritage",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3Aculturalheritage&maxFeatures=50000&outputFormat=application%2Fjson&srsname=EPSG:3857",
-      durl: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3Aculturalheritage&maxFeatures=50&outputFormat=SHAPE-ZIP",
-      dname: "Shipwrecks"
-    }, {
-      name: "Snewss",
-      layer: "AAU_Setup:culturalheritage",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3Aculturalheritage&maxFeatures=50000&outputFormat=application%2Fjson&srsname=EPSG:3857",
-      durl: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3Aculturalheritage&maxFeatures=50&outputFormat=SHAPE-ZIP",
-      dname: "Shs"
-    }]
-  }, {
-    name: "The Bay of Koege",
-    data: []
-  }]
-}, {
-  name: "Polish case",
-  sites: [{
-    name: "Puck Lagoon ",
-    data: [{
-      name: "hej",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3AArchaelogicalSitesPoland&maxFeatures=50&outputFormat=application%2Fjson&srsname=EPSG:3857"
-    }]
-  }, {
-    name: "Gulf of Gdansk",
-    data: [{
-      name: "hej",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3AGulfGdansk&maxFeatures=50&outputFormat=application%2Fjson"
-    }]
-  }]
-}, {
-  name: "Lithuanian case",
-  sites: [{
-    name: "Relict forest",
-    data: [{
-      name: "hej",
-      layer: "AAU_Setup:LithuanianShipWrecks",
-      url: "http://94.231.110.64:8080/geoserver/AAU_Setup/wms/kml?layers=AAU_Setup:LithuanianShipWrecks",
-      durl: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3ALithuanianShipWrecks&maxFeatures=50&outputFormat=SHAPE-ZIP",
-      dname: "Polish_Shipwrecks"
-    }]
-  }]
-}, {
-  name: "Russian case",
-  sites: [{
-    name: "South-Eastern Baltic ",
-    sites: [{
-      name: "Pilot area 1",
-      data: [{
-        name: "hej",
-        url: "http://94.231.110.64:8080/geoserver/AAU_Setup/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AAU_Setup%3AArchaelogicalSitesPoland&maxFeatures=50&outputFormat=application%2Fjson&srsname=EPSG:3857"
-      }]
-    }, {
-      name: "Pilot area 2",
-      data: []
-    }, {
-      name: "Pilot area 3",
-      data: []
-    }]
-  }, {
-    name: "Gulf of Finland",
-    sites: [{
-      name: "Pilot area 1",
-      data: []
-    }, {
-      name: "Pilot area 2",
-      data: []
-    }]
-  }]
-}, {
-  name: "Finnish-Estonian case",
-  sites: [{
-    name: "Gulf of Finland",
-    data: []
-  }]
-}, {
-  name: "Finnish case",
-  sites: [{
-    name: "Gulf of Finland",
-    data: []
-  }, {
-    name: "Gulf of Bothnia",
-    data: []
-  }]
-}];
-exports.panBalticCases = [{
-  name: "Panbaltic Layers",
-  data: [{
-    name: "Rutilus Points",
-    data: []
-  }, {
-    name: "Hansa Routes",
-    data: []
-  }, {
-    name: "Underwater Landscape",
-    data: []
-  }]
-}];
-},{}],"public/js/data/fetchContent.js":[function(require,module,exports) {
+})({"public/js/data/fetchContent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -257,6 +128,32 @@ exports.fetchData = fetchData;
 async function fetchData(token) {
   const options = createOptions(token);
   const response = await fetch("http://94.231.110.64:3000/api/data/content", options);
+  const data = await response.json();
+  return data;
+} //Managing post options
+
+
+function createOptions(data = "") {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": data
+    }
+  };
+  return options;
+}
+},{}],"public/js/data/fetchPanContent.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchpanData = fetchpanData;
+
+async function fetchpanData(token) {
+  const options = createOptions(token);
+  const response = await fetch("http://94.231.110.64:3000/api/pandata/pancontent", options);
   const data = await response.json();
   return data;
 } //Managing post options
@@ -54779,11 +54676,11 @@ exports.createMap = async function buildMap(curMap = map, background = backgroun
   curMap.addLayer(background);
 };
 },{"ol/Map.js":"../node_modules/ol/Map.js","ol/View.js":"../node_modules/ol/View.js","ol/control.js":"../node_modules/ol/control.js","ol/layer/Tile.js":"../node_modules/ol/layer/Tile.js","ol/source/XYZ.js":"../node_modules/ol/source/XYZ.js","ol/layer.js":"../node_modules/ol/layer.js","ol/source/TileArcGISRest":"../node_modules/ol/source/TileArcGISRest.js","ol/loadingstrategy.js":"../node_modules/ol/loadingstrategy.js","ol/source/Vector.js":"../node_modules/ol/source/Vector.js","ol/format/GeoJSON.js":"../node_modules/ol/format/GeoJSON.js","ol/style.js":"../node_modules/ol/style.js","ol/source/TileWMS.js":"../node_modules/ol/source/TileWMS.js"}],"index.js":[function(require,module,exports) {
-"use strict";
-
-var _cases = require("./public/js/data/cases");
+"use strict"; //import { cases, panBalticCases } from "./public/js/data/cases";
 
 var _fetchContent = require("./public/js/data/fetchContent");
+
+var _fetchPanContent = require("./public/js/data/fetchPanContent");
 
 var _map = require("./public/js/map");
 
@@ -54814,8 +54711,7 @@ let generateCaseContent = function (obj, depth = 0, parent = "top") {
   }
 
   if (obj.hasOwnProperty('data')) {
-    htmlString += '<ul class="layerlist">'; //layerlist
-
+    htmlString += '<ul class="layerlist">';
     obj.data.map(dataPoint => {
       const dataID = `${parent}-${identifier}-${dataPoint.name.toLowerCase().replace(/ /g, "_")}-layer`;
       const dataURL = dataPoint.url;
@@ -54831,7 +54727,6 @@ let generateCaseContent = function (obj, depth = 0, parent = "top") {
         </li>`;
     });
     htmlString += '</ul>';
-    console.log(htmlString);
   }
 
   return htmlString;
@@ -54844,11 +54739,10 @@ async function createHTML() {
   casesServer.map(caseSite => {
     localSelection.innerHTML += generateCaseContent(caseSite);
   });
-
-  _cases.panBalticCases.map(caseSite => {
+  const panBalticCasesServer = await (0, _fetchPanContent.fetchpanData)(token);
+  panBalticCasesServer.map(caseSite => {
     panSelection.innerHTML += generateCaseContent(caseSite);
   });
-
   accordionFunctionality(); //add toggle and hide functionality to the cases
 
   layerToggleFunctionality();
@@ -54969,7 +54863,7 @@ function displayPanBalticCases() {
 function DESTROYCONTENT(selection) {
   selection.style.display = "none";
 }
-},{"./public/js/data/cases":"public/js/data/cases.js","./public/js/data/fetchContent":"public/js/data/fetchContent.js","./public/js/map":"public/js/map.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./public/js/data/fetchContent":"public/js/data/fetchContent.js","./public/js/data/fetchPanContent":"public/js/data/fetchPanContent.js","./public/js/map":"public/js/map.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -54997,7 +54891,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53932" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50288" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

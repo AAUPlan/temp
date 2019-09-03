@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./public/css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="./public/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="./public/css/modal.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/metadataWindow.css">
     <link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
 
     <title>Baltic Front</title>
@@ -27,7 +28,24 @@
         
         <div class="greeting card white" ></div>
         <div class="addDataBox" title="Add Data" ></div>
-            
+        
+    <!--    <div class="mdwindow">
+            <div class="header">
+                The title of the metadata table will be displayed here
+            </div>
+
+            <div class="main_body">
+                <div class="column">
+                    <div class="main_title">Resource type</div>
+                    <div class="main_title">Host Organisation</div>
+                </div>
+                <div class="column">
+                    <div class="main_info">Resource type_reply</div>
+                    <div class="main_info">Host Organisation_reply</div>
+                </div>
+            </div>
+        </div> -->
+
         <div id="map" class="map grey lighten-2"></div>
 
         <div class="ui">
@@ -47,6 +65,8 @@
             </div>
         </div>
     </div>
+    
+
 
     <div class="flex align-center align-vert modal modal--align">
             <div class="modal__container">
@@ -61,11 +81,13 @@
                 
             </div>
     </div>
-    <script type="text/javascript" src="./public/js/modal.js"></script>   
+       
 
+
+ 
 
 
 </body>
-
+<script type="text/javascript" src="./public/js/modal.js"></script>
 <script type="text/javascript" src="./index.js"></script>
 </html>

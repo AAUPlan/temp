@@ -1,9 +1,9 @@
 
   
-  export async function fetchData(token) {
+  export async function fetchpanData(token) {
     const options= createOptions(token);
     const response = await fetch(
-      "http://94.231.110.64:3000/api/data/content",
+      "http://94.231.110.64:3000/api/pandata/pancontent",
       options
     );
     const data = await response.json();
