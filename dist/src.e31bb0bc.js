@@ -154,7 +154,35 @@ exports.fetchpanData = fetchpanData;
 async function fetchpanData(token) {
   const options = createOptions(token);
   const response = await fetch("http://94.231.110.64:3000/api/pandata/pancontent", options);
-  const data = await response.json();
+  const data = await response.json(); //console.log(data);
+
+  return data;
+} //Managing post options
+
+
+function createOptions(data = "") {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": data
+    }
+  };
+  return options;
+}
+},{}],"public/js/data/fetchMetaData.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchMetadata = fetchMetadata;
+
+async function fetchMetadata(token) {
+  const options = createOptions(token);
+  const response = await fetch("http://94.231.110.64:3000/api/metadata/metadata", options);
+  const data = await response.json(); //console.log(data);
+
   return data;
 } //Managing post options
 
@@ -54682,13 +54710,16 @@ var _fetchContent = require("./public/js/data/fetchContent");
 
 var _fetchPanContent = require("./public/js/data/fetchPanContent");
 
+var _fetchMetaData = require("./public/js/data/fetchMetaData");
+
 var _map = require("./public/js/map");
 
 const token = localStorage.getItem("auth-token");
 const user = localStorage.getItem("username");
 const localSelection = document.querySelector("#selectableContent");
 const panSelection = document.querySelector("#selectableContentPan");
-panSelection.style.display = "none";
+panSelection.style.display = "none"; //fetchMetadata();
+
 (0, _map.createMap)();
 populateNavbar();
 
@@ -54722,15 +54753,16 @@ let generateCaseContent = function (obj, depth = 0, parent = "top") {
         <label class='checkLayer'>
           <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}'/>
           <span> ${dataPoint.name} </span>
-        </label>
-        <a class='waves-effect download-button' role="button" name ='download-button' href='${downloadURL}' download='${downloadName}'>Download</a>
+        </label>  
+        <a class='download-button' role="button" name ='${dataLayer}' id='${dataID}' data-url='${dataURL}' layer='${dataLayer}'>Metadata</a>
         </li>`;
     });
     htmlString += '</ul>';
   }
 
   return htmlString;
-};
+}; //href='${downloadURL}' download='${downloadName}'
+
 
 createHTML();
 
@@ -54746,6 +54778,7 @@ async function createHTML() {
   accordionFunctionality(); //add toggle and hide functionality to the cases
 
   layerToggleFunctionality();
+  openWindowFunctionality();
 }
 
 function accordionFunctionality() {
@@ -54777,6 +54810,68 @@ function accordionFunctionality() {
           content.parentElement.style.maxHeight = parentContainerHeight + childContainerHeight + 10 + "px";
         }
       }
+    });
+  }
+}
+
+function openWindowFunctionality() {
+  const btn = document.querySelectorAll(".download-button");
+  const dialog = document.getElementById('metaDialog');
+  const cancelBtn = document.getElementById('cancel');
+
+  for (let downloadBtn = 0; downloadBtn < btn.length; downloadBtn++) {
+    const btnElements = btn[downloadBtn];
+    const btnName = btnElements['name'];
+    const btnID = btnElements['id'];
+    console.log(btnID);
+    btnElements.addEventListener("click", event => {
+      const metadata = (0, _fetchMetaData.fetchMetadata)(token);
+      Promise.resolve(metadata).then(function (values) {
+        const elements = document.querySelectorAll(".header");
+        values.forEach(function populateWindow(element) {
+          const metadataName = element.layer;
+
+          if (metadataName === btnName) {
+            const metadataName = element.layer;
+            const metadataCaseName = element.case_name;
+            const metadataSiteName = element.site_name;
+            const metadataResource = element.resource;
+            const metadataURL = element.host_organisation;
+            const metadataStr = document.createElement('div'); //Create div element for metadata
+
+            let domString = '<div class="main_title"> ';
+            domString += `Information about the layer is included in the title</div ><div class="main_body"><div class="column_small"><div class="row">Case Name</div > 
+                          <div class="row">Site Name</div>
+                          <div class="row">Resource Type</div>
+                          <div class="row">Host Organization</div>
+                          <div class="row">URL</div></div >`;
+            domString += `<div class="column_large">
+                          <div class="row">${metadataCaseName}</div>
+                          <div class="row">${metadataSiteName}</div>
+                          <div class="row">${metadataResource}</div>
+                          <div class="row">${metadataResource}</div>
+                          <div class="row">${metadataURL}</div>
+                        </div></div>
+                        `; //<a class='cancel' role="button">Close</a>
+
+            metadataStr.innerHTML = domString;
+            dialog.appendChild(metadataStr);
+            dialog.showModal();
+          }
+          /*else {
+            const metadataStr = document.createElement('div');
+            let domString = '<div class="main_title"> ';
+            domString += `Information about the layer is included in the title</div ><div class="main_body"> No metadata provided</div>`;
+            metadataStr.innerHTML = domString;
+            dialog.appendChild(metadataStr);
+          }*/
+
+
+          cancelBtn.addEventListener('click', event => {
+            dialog.close();
+          });
+        });
+      });
     });
   }
 }
@@ -54828,11 +54923,11 @@ function populateNavbar() {
     greetingBox.appendChild(usergreeting);
     const addDataBtn = document.createElement("BUTTON"); //Create greeting box for logged in users
 
-    addDataBtn.classList = "btn-floating waves-effect waves-light red";
+    addDataBtn.classList = "btn-floating waves-effect waves-light orange";
     addDataBtn.innerHTML = `+`;
     addDataBox.appendChild(addDataBtn);
     addDataBtn.addEventListener("click", event => {
-      window.open("http://94.231.110.64:8080/geoserver/web"); //Get the user to the
+      window.alert("This functionality is not complete! Select scenario to proceed!"); //Get the user to the
     });
   } else {
     greetingBox.classList = "invisible";
@@ -54863,7 +54958,7 @@ function displayPanBalticCases() {
 function DESTROYCONTENT(selection) {
   selection.style.display = "none";
 }
-},{"./public/js/data/fetchContent":"public/js/data/fetchContent.js","./public/js/data/fetchPanContent":"public/js/data/fetchPanContent.js","./public/js/map":"public/js/map.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./public/js/data/fetchContent":"public/js/data/fetchContent.js","./public/js/data/fetchPanContent":"public/js/data/fetchPanContent.js","./public/js/data/fetchMetaData":"public/js/data/fetchMetaData.js","./public/js/map":"public/js/map.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -54891,7 +54986,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50288" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63355" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

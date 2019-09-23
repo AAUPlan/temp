@@ -101,10 +101,8 @@ function defineLayer (dataURL, dataID, dataName) {
         source: createwmsLayer(dataURL,dataName),
         title: dataID
       });
-    }
-
-      
-    }
+    } 
+}
 
 exports.addLayerToMap = function(dataID, dataURL, dataName){
   let newLayerToggleSelector = document.querySelector(`#${dataID}`);

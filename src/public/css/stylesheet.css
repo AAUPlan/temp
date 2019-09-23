@@ -51,9 +51,17 @@ body{
 .btn{
     margin: 1rem; 
     display: table !important;
-    word-break: break-all !important;
-    
+    word-break: break-all !important;    
 }
+
+.btn_selection {
+    margin: 1rem;
+    display: table !important;
+    word-break: break-all !important;
+    background-color: #26a69a !important;
+    opacity: 0.45 !important;
+}
+
 .btn-wide{
     width:100%;
 }
@@ -228,6 +236,7 @@ nav{
     justify-content: flex-end;
     min-height:1rem;
     max-height: 2rem;
+    
 }
 
 .registerBtn {
@@ -248,6 +257,12 @@ nav{
     display:flex;
     flex-direction: row;
     justify-content: center;
+}
+.manual {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 

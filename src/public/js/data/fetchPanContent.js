@@ -6,7 +6,9 @@
       "http://94.231.110.64:3000/api/pandata/pancontent",
       options
     );
-    const data = await response.json();
+      
+      const data = await response.json();
+      //console.log(data);
    return data;
    
   }
