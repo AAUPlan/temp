@@ -2,7 +2,7 @@
 
 
 //import { cases, panBalticCases } from "./public/js/data/cases";
-import {fetchData} from "./public/js/data/fetchContent";
+import { fetchData} from "./public/js/data/fetchContent";
 import { fetchpanData } from "./public/js/data/fetchPanContent"
 import { fetchMetadata } from "./public/js/data/fetchMetaData"
 import { createMap, addLayerToMap } from "./public/js/map";
@@ -14,62 +14,63 @@ const panSelection = document.querySelector("#selectableContentPan");
 panSelection.style.display = "none";
 
 
-//fetchMetadata();
 createMap();
 populateNavbar();
+populateToolBar();
 
 let generateCaseContent = function(obj, depth = 0, parent = "top"){
   // This rather convoluted recursive function iterates through the input data and populates the UI with accordions accordingly. With this approach, the input data can be of any depth. Consider the naming of the objects in the input, they should be  unique.
 
   const colors = ["wave-effect waves-light", "orange darken-5", "cyan darken-1"]; //wave-effect, "red", "blue"
   const identifier = obj.name.toLowerCase().replace(/ /g, "_");
-  
+
   let htmlString = `<li id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</li>`;
       htmlString += `<div class='content ${identifier} accordion-container level-${depth} '>`;
 
- /* let htmlString = `<button id='${parent}-${identifier}-${depth}' class='${colors[depth]} btn accordion'>${obj.name}</button>`;
-      htmlString += `<div class='content ${identifier} accordion-container level-${depth} '>`;*/
-  
+
   if(obj.hasOwnProperty('sites')){
     depth += 1;
     obj.sites.map( site => {
       htmlString += generateCaseContent(site, depth, identifier);
-      htmlString += "</div>";}   
+      htmlString += "</div>";}
     )
   }
-  
+
   if(obj.hasOwnProperty('data')){
-    htmlString += '<ul class="layerlist">' 
+    htmlString += '<ul class="layerlist">'
     obj.data.map( dataPoint  => {
       const dataID = `${parent}-${identifier}-${dataPoint.name.toLowerCase().replace(/ /g, "_")}-layer`;
       const dataURL = dataPoint.url;
+      const dataLegend = dataPoint.legend;
       const downloadURL = dataPoint.durl;
       const downloadName = dataPoint.dname;
       const dataLayer = dataPoint.layer;
       htmlString += `<li class= 'layer'>
         <label class='checkLayer'>
-          <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}'/>
-          <span> ${dataPoint.name} </span>
-        </label>  
-        <a class='download-button' role="button" name ='${dataLayer}' id='${dataID}' data-url='${dataURL}' layer='${dataLayer}'>Metadata</a>
+          <input type='checkbox' class='toggle' id='${dataID}' data-url='${dataURL}' data-layer='${dataLayer}' data-legend='${dataLegend}'/>
+          <span class='layerName'> ${dataPoint.name} </span>
+        </label>
+        <a class='download-button' role="button" name ='${dataLayer}' id='${dataID}' data-url='${dataURL}' layer='${dataLayer}'><img src="https://static.thenounproject.com/png/77940-200.png" width="15" height="15"></a>
         </li>`;
     })
     htmlString += '</ul>'
     }
-    
+
   return htmlString;
+
 }
 
+//<a class='legend' legend='${dataLegend}'><img src="${dataLegend}"></a>
 //href='${downloadURL}' download='${downloadName}'
 createHTML();
 async function createHTML (){
   const casesServer = await fetchData(token);
     casesServer.map(caseSite => {
-    localSelection.innerHTML += generateCaseContent(caseSite); 
+    localSelection.innerHTML += generateCaseContent(caseSite);
   });
   const panBalticCasesServer = await fetchpanData(token);
   panBalticCasesServer.map(caseSite => {
-    panSelection.innerHTML += generateCaseContent(caseSite); 
+    panSelection.innerHTML += generateCaseContent(caseSite);
   });
 
     accordionFunctionality(); //add toggle and hide functionality to the cases
@@ -84,12 +85,12 @@ function accordionFunctionality() {
     accordions[index].addEventListener("click", event => {
       const target = `#${event.target.id}`;
       const content = document.querySelector(target).nextSibling; //Get the accordion content to toggle it below
-   
+
       //If max height = 0 (closed), then open.
       if (content.style.maxHeight) {
         let parentContainerHeight = parseInt(content.parentElement.style.maxHeight.split("p")[0]); //The height of the element is returned as a string e.g. 100px. For this reason, the string is split at p, the first element, the number, is then parced as an integer.
         let childContainerHeight = parseInt(content.style.maxHeight.split("p")[0]);
-  
+
         //If open, close it.
         content.style.maxHeight = null;
         content.style.overflow = "hidden";
@@ -102,7 +103,7 @@ function accordionFunctionality() {
         if(content.parentElement.classList.contains("accordion-container")){
           let parentContainerHeight = parseInt(content.parentElement.style.maxHeight.split("p")[0]); //The height of the element is returned as a string e.g. 100px. For this reason, the string is split at p, the first element, the number, is then parced as an integer.
           let childContainerHeight = parseInt(content.style.maxHeight.split("p")[0]);
-    
+
           content.parentElement.style.maxHeight = parentContainerHeight + childContainerHeight + 10 + "px";
         }
       }
@@ -113,89 +114,110 @@ function accordionFunctionality() {
 function openWindowFunctionality() {
     const btn = document.querySelectorAll(".download-button");
     const dialog = document.getElementById('metaDialog');
-    const cancelBtn = document.getElementById('cancel');
-  
+    
     for (let downloadBtn = 0; downloadBtn < btn.length; downloadBtn++) {
         const btnElements = btn[downloadBtn];
         const btnName = btnElements['name'];
         const btnID = btnElements['id'];
-        console.log(btnID);
+        const box = document.createElement('div'); //Create div element for metadata
+        const form = document.createElement('form'); //Create div element for metadata
+        const closeBtn = document.createElement('Button'); //Create button element for closing metadata window
+        closeBtn.classList = "waves-effect waves-light btn-small closeBtn";
+        const closeTxt = document.createTextNode("Close");
+        
         btnElements.addEventListener("click", event => {
-            
             const metadata = fetchMetadata(token);
             Promise.resolve(metadata).then(function (values) {
                 
-                const elements = document.querySelectorAll(".header");
-                
+
                 values.forEach(function populateWindow(element) {
                     const metadataName = element.layer;
-                    
-                    if (metadataName === btnName) {
 
-                        const metadataName = element.layer;
-                        const metadataCaseName = element.case_name;
-                        const metadataSiteName = element.site_name;
-                        const metadataResource = element.resource;
-                        const metadataURL = element.host_organisation;
+                      if (metadataName !== "undefined" && btnName!== "undefined" && metadataName===btnName) {
+       
+                          const metadataCaseName = element.case_name;
+                          const metadataSiteName = element.site_name;
+                          const metadataResource = element.resource;
+                          const metadataDescription = element.description;
+                          const metadataORG = element.host_organisation;
+                          const metadataURL = element.url;
+                          const metadataTitle = element.title;
+                          const metadataXML = element.XML;
+                          const legendURL = element.legend;
 
-                        const metadataStr = document.createElement('div'); //Create div element for metadata
-                        let domString = '<div class="main_title"> ';
-                        domString += `Information about the layer is included in the title</div ><div class="main_body"><div class="column_small"><div class="row">Case Name</div > 
-                          <div class="row">Site Name</div>
-                          <div class="row">Resource Type</div>
-                          <div class="row">Host Organization</div>
-                          <div class="row">URL</div></div >`;
-                        domString += `<div class="column_large">
-                          <div class="row">${metadataCaseName}</div>
-                          <div class="row">${metadataSiteName}</div>
-                          <div class="row">${metadataResource}</div>
-                          <div class="row">${metadataResource}</div>
-                          <div class="row">${metadataURL}</div>
-                        </div></div>
-                        `;
-                        //<a class='cancel' role="button">Close</a>
-                        metadataStr.innerHTML = domString;
-                        dialog.appendChild(metadataStr);
-                        dialog.showModal();
-                    } /*else {
-                        const metadataStr = document.createElement('div');
-                        let domString = '<div class="main_title"> ';
-                        domString += `Information about the layer is included in the title</div ><div class="main_body"> No metadata provided</div>`;
-                        metadataStr.innerHTML = domString;
-                        dialog.appendChild(metadataStr);
-                    }*/
-                    
-                   
+                          let domString = '<div class="main_title"> ';
+                          domString += `${metadataTitle} </div >
+                            <div class="main_body">
+                                <div class="row">
+                                    <div class="column_small">Case Name</div>
+                                    <div class="column_large">${metadataCaseName}</div>
+                                </div> 
+                                <div class="row">
+                                    <div class="column_small">Site Name</div>
+                                    <div class="column_large">${metadataSiteName}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="column_small">Resource</div>
+                                    <div class="column_large">${metadataORG}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="column_small">Metadata (XML)</div>
+                                    <div class="column_large">${metadataXML}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="column_small">Description</div>
+                                    <div class="column_large">${metadataDescription}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="column_small">Legend</div>
+                                    <div class="column_large"><a href='${legendURL}'><img src='${legendURL}'></a></div>
+                                </div>`;
+                          
+                        form.innerHTML = domString;
+                        closeBtn.appendChild(closeTxt);
+                        box.appendChild(form);
+                        box.appendChild(closeBtn);
+                        dialog.appendChild(box);                   
+                        dialog.show();
+                      }
 
-                    cancelBtn.addEventListener('click', event => {
-                        dialog.close();
+                    document.body.addEventListener('click', event => {
+                        DESTROYCONTENT(box);
+                        box.removeChild(form);
+                        dialog.close()
+  
                     });
-                    
-                    });       
-            });   
-        }) 
+                        closeBtn.addEventListener('click', event => {
+                            DESTROYCONTENT(box);
+                            box.removeChild(form);
+                            dialog.close()
+                        });
+                  });
+            });
+        })
     }
 }
 
+
 function layerToggleFunctionality(){
   const toggles = document.querySelectorAll(".toggle");
-  
+
   toggles.forEach ((toggleButton)=> {
-      
+
     const dataID = toggleButton.id;
-    const dataURL = toggleButton.getAttribute("data-url"); 
+    const dataURL = toggleButton.getAttribute("data-url");
     const dataName = toggleButton.getAttribute("data-layer");
-    if( dataURL !== "undefined" && dataID !== "undefined" && dataName !== "undefined")  return addLayerToMap(dataID, dataURL, dataName);
-   
-  })
-  
+    const dataLegend = toggleButton.getAttribute("data-legend");
+      if (dataURL !== "undefined" && dataID !== "undefined" && dataName !== "undefined") return addLayerToMap(dataID, dataURL, dataName);
+     })
+
 }
 
 function populateNavbar() {
   const navbar = document.querySelector("#nav-btns");
   const greetingBox = document.querySelector (".greeting");
-  const addDataBox = document.querySelector (".addDataBox");
 
+    
   // If the user has an authorized token in local storage, the UI will change
   if (!token) {
     const linkToLogin = document.createElement("a"); //TODO consider making these buttons for accesibility consistency½
@@ -228,20 +250,43 @@ if (user) {
   usergreeting.classList = "gray-text";
   usergreeting.innerHTML = `Hello ${user}`;
   greetingBox.appendChild(usergreeting);
-  
-  const addDataBtn = document.createElement("BUTTON"); //Create greeting box for logged in users
-  addDataBtn.classList = "btn-floating waves-effect waves-light orange";
-  addDataBtn.innerHTML = `+`;
-  addDataBox.appendChild(addDataBtn);
 
-  addDataBtn.addEventListener("click", event => {
-    window.alert("This functionality is not complete! Select scenario to proceed!"); //Get the user to the
-  });
 }
 else{
   greetingBox.classList = "invisible";
-  addDataBox.classList = "invisible";
+  
 }
+}
+
+function populateToolBar() {
+   
+    if (user) {
+        const toolLine = document.querySelector("#toolLine");
+        const basemapBtn = document.createElement("BUTTON"); //Create button for changing base map
+        basemapBtn.innerHTML = '<i class="tiny material-icons">layers</i>';
+        basemapBtn.classList = "toolBtns";
+
+        const downloadMap = document.createElement("BUTTON"); //Create button for downloading the image of the image in current extent
+        downloadMap.innerHTML ='<i class="tiny material-icons">cloud_download</i>';
+        downloadMap.classList = "toolBtns";
+        //<a id="export-png" class="btn" download="map.png"><i class="icon-download"></i> Export PNG</a>
+
+        const addDataBtn = document.createElement("BUTTON"); //Create button to upload data
+        addDataBtn.innerHTML = `<i class="tiny material-icons">add_box</i>`;
+        addDataBtn.classList = "toolBtns";
+
+        toolLine.appendChild(basemapBtn);
+        toolLine.appendChild(downloadMap);
+        toolLine.appendChild(addDataBtn);
+
+        addDataBtn.addEventListener("click", event => {
+            window.alert("This functionality is not complete! Select scenario to proceed!"); //Get the user to the
+        });
+    }
+    else {
+        toolLine.classList = "invisible";
+        
+    }
 }
 
 
@@ -273,17 +318,3 @@ function displayPanBalticCases() {
 function DESTROYCONTENT(selection) {
   selection.style.display = "none";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

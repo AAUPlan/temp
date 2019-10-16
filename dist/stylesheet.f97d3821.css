@@ -1,7 +1,8 @@
-body{
-    height: 100vh;
+body {
+    height: 100vh; /*vh*/
     width: 100vw;
-    overflow-y: hidden;
+    overflow-y: initial;
+    overflow-x: hidden;
 }
 
 .form{
@@ -33,7 +34,7 @@ body{
     width: 100%;
 }
 
-#toggle-content{
+#toggle-content {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -49,7 +50,7 @@ body{
 }
 
 .btn{
-    margin: 1rem; 
+    margin: 0.5rem; 
     display: table !important;
     word-break: break-all !important;    
 }
@@ -58,8 +59,14 @@ body{
     margin: 1rem;
     display: table !important;
     word-break: break-all !important;
-    background-color: #26a69a !important;
-    opacity: 0.45 !important;
+    background-color: #20736b !important;
+    opacity: 0.5 !important;
+}
+.btn_preselection {
+    margin: 1rem;
+    display: table !important;
+    word-break: break-all !important;
+    background-color: #20736b !important;
 }
 
 .btn-wide{
@@ -184,6 +191,7 @@ nav{
     justify-content: center;
     min-height:2rem;
     max-height: 3rem;
+    right:1%;
 }
 
 .greeting p{
@@ -202,23 +210,37 @@ nav{
     margin-top: 1%;
     margin-bottom: 1%;
 }
-
+.toggle {
+    width: 15px;
+    height: 15px;
+}
 .layer{
     margin-left:0.5rem;
+    font-size:0.8rem !important;
     right:0px;
     display:flex;
     flex-direction: row;
     align-content: space-between;
     justify-content: space-between;
+    
     }
+.layerName {
+    margin-left: 0.5rem;
+    font-size: 0.90rem !important;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
 
-.download-button{
+.download-button {
     text-align: center;
-    display:flex;
+    display: flex;
     align-content: center;
     align-content: center;
-    padding-left:0.3rem;
-    padding-right:0.3rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
     cursor: pointer;
 }
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/stylesheet.f97d3821.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/materialize.min.a590c6cc.css">
     <link rel="stylesheet" type="text/css" href="/modal.dc79986b.css">
     <link rel="stylesheet" type="text/css" href="/metadataWindow.4fc9a5ce.css">
@@ -27,14 +28,9 @@
         </nav>
 
         <div class="greeting card white"></div>
-        <div class="addDataBox" title="Add Data"></div>
-
-        <dialog id="metaDialog" class="metaDialog">
-            <form method="dialog"></form>
-          
-                <a id="cancel" "value="cancel"></a>
-            
-        </dialog>
+        
+        <div id="toolLine"></div>
+        <dialog id="metaDialog" class="metaDialog"></dialog>
 
         <div id="map" class="map grey lighten-2"></div>
 
@@ -74,6 +70,8 @@
             </div>
         </div>
     </div>
+
+    
 
     <script>function focusMe(button) {
   var elem = document.getElementsByClassName("btn_preselection")[0];

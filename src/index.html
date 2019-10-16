@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./public/css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./public/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="./public/css/modal.css">
     <link rel="stylesheet" type="text/css" href="./public/css/metadataWindow.css">
-    <link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v5.3.0/css/ol.css" >
+    <link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v5.3.0/css/ol.css">
 
     <title>Baltic Front</title>
 </head>
@@ -27,14 +28,9 @@
         </nav>
 
         <div class="greeting card white"></div>
-        <div class="addDataBox" title="Add Data" ></div>
-
-        <dialog id="metaDialog" class="metaDialog">
-            <form method="dialog"></form>
-          
-                <a id="cancel" "value="cancel"></a>
-            
-        </dialog>
+        
+        <div id="toolLine" ></div>
+        <dialog id="metaDialog" class="metaDialog"></dialog>
 
         <div id="map" class="map grey lighten-2"></div>
 
@@ -75,12 +71,14 @@
         </div>
     </div>
 
+    
+
     <script type="text/javascript">
 
         function focusMe(button) {
-            
+
             var elem = document.getElementsByClassName("btn_preselection")[0];
-            
+
             if (elem) {
                 elem.className = "waves-effect waves-light btn btn_selection";
             }
