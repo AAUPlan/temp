@@ -114,7 +114,7 @@ function accordionFunctionality() {
 function openWindowFunctionality() {
     const btn = document.querySelectorAll(".download-button");
     const dialog = document.getElementById('metaDialog');
-    
+
     for (let downloadBtn = 0; downloadBtn < btn.length; downloadBtn++) {
         const btnElements = btn[downloadBtn];
         const btnName = btnElements['name'];
@@ -124,17 +124,17 @@ function openWindowFunctionality() {
         const closeBtn = document.createElement('Button'); //Create button element for closing metadata window
         closeBtn.classList = "waves-effect waves-light btn-small closeBtn";
         const closeTxt = document.createTextNode("Close");
-        
+
         btnElements.addEventListener("click", event => {
             const metadata = fetchMetadata(token);
             Promise.resolve(metadata).then(function (values) {
-                
+
 
                 values.forEach(function populateWindow(element) {
                     const metadataName = element.layer;
 
                       if (metadataName !== "undefined" && btnName!== "undefined" && metadataName===btnName) {
-       
+
                           const metadataCaseName = element.case_name;
                           const metadataSiteName = element.site_name;
                           const metadataResource = element.resource;
@@ -151,7 +151,7 @@ function openWindowFunctionality() {
                                 <div class="row">
                                     <div class="column_small">Case Name</div>
                                     <div class="column_large">${metadataCaseName}</div>
-                                </div> 
+                                </div>
                                 <div class="row">
                                     <div class="column_small">Site Name</div>
                                     <div class="column_large">${metadataSiteName}</div>
@@ -172,12 +172,12 @@ function openWindowFunctionality() {
                                     <div class="column_small">Legend</div>
                                     <div class="column_large"><a href='${legendURL}'><img src='${legendURL}'></a></div>
                                 </div>`;
-                          
+
                         form.innerHTML = domString;
                         closeBtn.appendChild(closeTxt);
                         box.appendChild(form);
                         box.appendChild(closeBtn);
-                        dialog.appendChild(box);                   
+                        dialog.appendChild(box);
                         dialog.show();
                       }
 
@@ -185,7 +185,7 @@ function openWindowFunctionality() {
                         DESTROYCONTENT(box);
                         box.removeChild(form);
                         dialog.close()
-  
+
                     });
                         closeBtn.addEventListener('click', event => {
                             DESTROYCONTENT(box);
@@ -217,7 +217,7 @@ function populateNavbar() {
   const navbar = document.querySelector("#nav-btns");
   const greetingBox = document.querySelector (".greeting");
 
-    
+
   // If the user has an authorized token in local storage, the UI will change
   if (!token) {
     const linkToLogin = document.createElement("a"); //TODO consider making these buttons for accesibility consistency½
@@ -254,12 +254,12 @@ if (user) {
 }
 else{
   greetingBox.classList = "invisible";
-  
+
 }
 }
 
 function populateToolBar() {
-   
+
     if (user) {
         const toolLine = document.querySelector("#toolLine");
         const basemapBtn = document.createElement("BUTTON"); //Create button for changing base map
@@ -285,7 +285,7 @@ function populateToolBar() {
     }
     else {
         toolLine.classList = "invisible";
-        
+
     }
 }
 

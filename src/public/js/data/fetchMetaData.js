@@ -2,7 +2,7 @@
 export async function fetchMetadata(token) {
     const options = createOptions(token);
     const response = await fetch(
-        "http://94.231.110.64:3000/api/metadata/metadata",
+        "https://balticrimdataportal.eu:3000/api/metadata/metadata",
         options
     );
     const data = await response.json();
@@ -21,4 +21,3 @@ function createOptions(data = "") {
     };
     return options;
 }
-

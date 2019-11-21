@@ -14,7 +14,7 @@ registerForm.addEventListener("submit", event => {
 
 async function registerUser(options) {
   const response = await fetch(
-    "http://balticrimdataportal.eu:3000/api/user/register",
+    "http://94.231.110.64:3000/api/user/register",
     options
   );
   const data = await response.json();

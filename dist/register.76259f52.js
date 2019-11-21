@@ -136,7 +136,7 @@ registerForm.addEventListener("submit", event => {
 });
 
 async function registerUser(options) {
-  const response = await fetch("http://balticrimdataportal.eu:3000/api/user/register", options);
+  const response = await fetch("http://94.231.110.64:3000/api/user/register", options);
   const data = await response.json();
   const status = document.querySelector("#register-status");
   status.innerHTML = data.msg;
@@ -199,7 +199,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63469" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49743" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

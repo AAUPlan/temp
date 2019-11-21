@@ -127,7 +127,7 @@ exports.fetchData = fetchData;
 
 async function fetchData(token) {
   const options = createOptions(token);
-  const response = await fetch("http://94.231.110.64:3000/api/data/content", options);
+  const response = await fetch("https://balticrimdataportal.eu:3000/api/data/content", options);
   const data = await response.json();
   return data;
 } //Managing post options
@@ -153,7 +153,7 @@ exports.fetchpanData = fetchpanData;
 
 async function fetchpanData(token) {
   const options = createOptions(token);
-  const response = await fetch("http://94.231.110.64:3000/api/pandata/pancontent", options);
+  const response = await fetch("https:///balticrimdataportal.eu:3000/api/pandata/pancontent", options);
   const data = await response.json(); //console.log(data);
 
   return data;
@@ -180,7 +180,7 @@ exports.fetchMetadata = fetchMetadata;
 
 async function fetchMetadata(token) {
   const options = createOptions(token);
-  const response = await fetch("http://94.231.110.64:3000/api/metadata/metadata", options);
+  const response = await fetch("https://balticrimdataportal.eu:3000/api/metadata/metadata", options);
   const data = await response.json(); //console.log(data);
 
   return data;
@@ -55663,7 +55663,7 @@ function openWindowFunctionality() {
                                 <div class="row">
                                     <div class="column_small">Case Name</div>
                                     <div class="column_large">${metadataCaseName}</div>
-                                </div> 
+                                </div>
                                 <div class="row">
                                     <div class="column_small">Site Name</div>
                                     <div class="column_large">${metadataSiteName}</div>
@@ -55836,7 +55836,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63469" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49743" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
